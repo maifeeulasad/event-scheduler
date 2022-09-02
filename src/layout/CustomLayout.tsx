@@ -1,55 +1,41 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import Layout from 'antd/lib/layout';
-import PageHeader from 'antd/lib/page-header';
-import { Link, useNavigate } from 'react-router-dom';
+import { CustomLink } from './CustomLink';
 
-const { Header, Content, Footer } = Layout;
+import logo from './icon.svg';
 
-const CustomHeader = () => {
-  const navigate = useNavigate();
-  return (
-    <PageHeader
-      className="site-page-header h-full"
-      title={<Link to="/">React Pipeline</Link>}
-      subTitle="SPA using React + TS + Vite + Tailwind"
-      onBack={() => navigate(-1)}
-      extra={
-        <>
-          <Link to="/page2">Page 2</Link>
-          <Link to="/page3">Page 3</Link>
-        </>
-  }
-    />
-  );
-};
-
-const CustomFooter = () => (
-  <div className="text-center">
-    &copy; Maifee Ul Asad
-  </div>
+const NavBar = () => (
+  <nav className="navbar navbar-expand-md bg-light w-screen">
+    <div className="container">
+      <nav className="flex items-center justify-between flex-grow p-2">
+        <img src={logo} className="animate-spin h-10" alt="icon" />
+        <CustomLink target="about" text="About us" />
+        <CustomLink target="we" text="What We do" />
+        <CustomLink target="work" text="Our Work" />
+        <CustomLink target="blog" text="Blog" />
+        <CustomLink target="hi" text="Say hi" />
+      </nav>
+    </div>
+  </nav>
 );
 
-interface ILayoutProps {
+const CustomHeader = () => (
+  <NavBar />
+);
+interface ICustomLayoutProps {
   children: any
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
-class CustomLayout extends React.Component<ILayoutProps> {
+class CustomLayout extends React.Component<ICustomLayoutProps> {
   render() {
     const { children } = this.props;
 
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Header style={{ backgroundColor: 'white' }}>
-          <CustomHeader />
-        </Header>
-        <Content>
-          {children}
-        </Content>
-        <Footer style={{ backgroundColor: 'white' }}>
-          <CustomFooter />
-        </Footer>
-      </Layout>
+      <>
+        <CustomHeader />
+        {children}
+      </>
     );
   }
 }
