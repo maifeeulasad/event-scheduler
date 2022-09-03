@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import styles from './Conference.module.scss';
-import { getConferenceSpeakers } from '../../services/conference-service';
+import { getConferenceSpeakers, getConferenceLocations } from '../../services/conference-service';
 import { CustomLoader } from '../../widget/loader/CustomLoader';
 import { ContactCard, IContact } from './ContactCard';
+import { LocationCard, ILocation } from './LocationCard';
+import { CustomLink } from '../../widget/link/CustomLink';
 
 interface ILeftMenu {
   menuItems: string[]
@@ -64,8 +66,39 @@ const SpeakersContent = ({ conferenceId }: ISpeakersContent) => {
       </div>
     );
 };
-const LocationContent = () => <div>Location</div>;
-const ScheduleContent = () => <div>Schedule</div>;
+
+interface ILocationConference {
+  conference: {
+    locations: ILocation[]
+  }
+}
+
+interface ILocationContent {
+  conferenceId: string
+}
+
+const LocationContent = ({ conferenceId }:ILocationContent) => {
+  const { loading, data } = useQuery<ILocationConference>(getConferenceLocations(), {
+    variables: { id: conferenceId },
+  });
+
+  return loading ?
+    <CustomLoader /> :
+    (
+      <div>
+        {data?.conference.locations.map((location) => (
+          <LocationCard
+            address={location.address}
+            city={location.city}
+            image={location.image}
+            country={location.country}
+          />
+        ))}
+      </div>
+    );
+};
+
+const ScheduleContent = () => <div> <CustomLink target="/" text="Avaiable @ Home" /> </div>;
 const SponsorsContent = () => <div>Sponsors</div>;
 
 interface IRightContent {
@@ -77,7 +110,7 @@ const RightContent = ({ selectedMenu, conferenceId }: IRightContent) => (
   <div className="m-8 w-4/5">
     {selectedMenu === 'Organizer' && <OrganizerContent />}
     {selectedMenu === 'Speakers' && <SpeakersContent conferenceId={conferenceId} />}
-    {selectedMenu === 'Location' && <LocationContent />}
+    {selectedMenu === 'Location' && <LocationContent conferenceId={conferenceId} />}
     {selectedMenu === 'Schedule' && <ScheduleContent />}
     {selectedMenu === 'Sponsors' && <SponsorsContent />}
   </div>
@@ -90,7 +123,7 @@ const Conference = () => {
   }
 
   const menuItems = ['Organizer', 'Speakers', 'Location', 'Schedule', 'Sponsors'];
-  const [selectedMenu, setSelectedMenu] = useState(menuItems[0]);
+  const [selectedMenu, setSelectedMenu] = useState(menuItems[1]);
 
   return (
     <div>

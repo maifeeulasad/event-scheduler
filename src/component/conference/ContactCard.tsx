@@ -1,5 +1,7 @@
 import React from 'react';
-import styles from './ContactCard.module.scss'
+import styles from './ContactCard.module.scss';
+
+import defaultImage from './404.png';
 
 interface IContactCard {
   name: string
@@ -11,9 +13,13 @@ interface IContactCard {
 
 const ContactCard = ({ name, aboutShort, image }: IContactCard) => (
   <div className={`flex ${styles.contactWrap}`}>
-    <img className="w-12 h-12 m-4" src={image.url} alt={name} />
+    <img
+      loading="lazy"
+      className="w-12 h-12 m-4"
+      src={image.url || defaultImage}
+      alt={name}
+    />
     <div>
-
       <h1>{name}</h1>
       <div>{aboutShort}</div>
     </div>
