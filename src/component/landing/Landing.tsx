@@ -4,8 +4,8 @@ import Button from 'antd/lib/button';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { gql, useQuery } from '@apollo/client';
 
-import imageLeft from './image-left.svg';
-import imageRight from './image-right.svg';
+import imageLeft from './image-left.jpg';
+import imageRight from './image-right.jpg';
 import { CustomCalendar } from '../../widget/calendar/CustomCalendar';
 import { NavBar } from '../nav/NavBar';
 import { CustomLoader } from '../../widget/loader/CustomLoader';
@@ -15,29 +15,37 @@ import styles from './Landing.module.scss';
 const LandingStatic = () => (
   <div className="h-screen">
     <NavBar />
-    <div className="container">
-      <div className="text-right">
-        <h1>React</h1>
-        <h1>Conference</h1>
-      </div>
+    <div className="container m-12">
       <div className="flex">
-        <img src={imageLeft} className="h-14" alt="icon" />
-        <div className="w-1/3">
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
+        <div>
+          <div className={`text-right ${styles.staticTitle}`}>
+            <div>React</div>
+            <div>Conference</div>
           </div>
-          <Button
-            type="primary"
-            shape="round"
-            icon={<ArrowRightOutlined />}
-            className="yellow-500"
-          >
-            Buy Ticket
-          </Button>
+
+          <div className="flex">
+            <img className={`m-4 ${styles.staticImageLeft}`} src={imageLeft} alt="icon" />
+            <div>
+              <div className={`m-4 ${styles.staticSubTitle}`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam
+              </div>
+              <Button
+                type="primary"
+                shape="round"
+                icon={<ArrowRightOutlined />}
+                className="yellow-500 m-4"
+              >
+                Buy Ticket
+              </Button>
+            </div>
+          </div>
         </div>
-        <img src={imageRight} className="h-20" alt="icon" />
+        <div>
+          <div className={styles.staticImageFillSpace} />
+          <img className={`m-4 ${styles.staticImageRight}`} src={imageRight} alt="icon" />
+        </div>
       </div>
     </div>
   </div>

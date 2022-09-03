@@ -7,3 +7,29 @@
   color: rgba(10, 20, 47, 0.800000011920929);
   font-size: 20px;
 }
+
+.staticTitle{
+  font-weight: Bold;
+  font-size: 100px;
+}
+
+.staticSubTitle{
+  font-size: 20px;
+}
+
+.staticImageLeft{
+  width: 329px;
+  height: 419px
+}
+
+.staticImageRight{
+  width: 549px;
+  height: 559px;
+}
+
+//todo: make it grow
+.staticImageFillSpace{
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
