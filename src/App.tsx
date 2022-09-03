@@ -22,7 +22,7 @@ const App = () => (
       <CustomLayout>
         <Routes>
           <Route path="/landing" element={<Landing />} />
-          <Route path="/conference/:id" element={<Conference />} />
+          <Route path="/conference/:conferenceId" element={<Conference />} />
           <Route
             path="*"
             element={<Navigate to="/landing" replace />}
