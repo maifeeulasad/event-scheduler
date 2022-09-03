@@ -24,11 +24,15 @@ const CellEntry = ({ time, data, header }: ICellEntry) => {
   return (
     <td>
       {filteredData.map((datum) => (
-        <div className={styles.item}>
-          <CustomLink
-            target={`/conference/${datum.conferenceId}`}
-            text={datum.title}
-          />
+        <div className={styles.itemWrap}>
+          <div className={styles.itemDate}>{(datum.day as Moment).format('DD-MM-yyyy')}</div>
+          <div className={styles.item}>
+            <CustomLink
+              classes={styles.itemLink}
+              target={`/conference/${datum.conferenceId}`}
+              text={datum.title}
+            />
+          </div>
         </div>
       ))}
     </td>

@@ -8,6 +8,9 @@ import imageLeft from './image-left.svg';
 import imageRight from './image-right.svg';
 import { CustomCalendar } from '../../widget/calendar/CustomCalendar';
 import { NavBar } from '../nav/NavBar';
+import { CustomLoader } from '../../widget/loader/CustomLoader';
+
+import styles from './Landing.module.scss';
 
 const LandingStatic = () => (
   <div className="h-screen">
@@ -64,10 +67,18 @@ const LandingCalendar = () => {
   // });
   const { loading, data } = useQuery(GetConferences);
   return loading ? (
-    <div>loading</div>
+    <CustomLoader />
   ) : (
     <div className="h-screen">
-      <CustomCalendar calendarData={data} />
+      <div className="p-12">
+        <div className="p-12">
+          <div className={styles.calendarTitle}>Event Schedule</div>
+          <div className={styles.calendarSubTitle}>Lorem uis diam turpis quam id fermentum.In quis diam turpis quam id fermentum.</div>
+        </div>
+        <div className="p-12">
+          <CustomCalendar calendarData={data} />
+        </div>
+      </div>
     </div>
   );
 };
