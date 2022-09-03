@@ -85,6 +85,9 @@ const RightContent = ({ selectedMenu, conferenceId }: IRightContent) => (
 
 const Conference = () => {
   const { conferenceId } = useParams();
+  if (!conferenceId) {
+    return <CustomLoader />;
+  }
 
   const menuItems = ['Organizer', 'Speakers', 'Location', 'Schedule', 'Sponsors'];
   const [selectedMenu, setSelectedMenu] = useState(menuItems[0]);
