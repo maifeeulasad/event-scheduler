@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Conference = () => <div/>
+const Conference = () => <div>conference</div>;
 
-export {Conference}
+export { Conference };

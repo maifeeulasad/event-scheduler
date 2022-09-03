@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import moment, { Moment } from 'moment';
 
 import styles from './WeekCalendar.module.scss';
+import { CustomLink } from '../link/CustomLink';
 
 interface IHeaderData {
   day: number
@@ -19,7 +20,11 @@ const CellEntry = ({ time, data, header }: ICellEntry) => {
   const filteredData = data.filter((datum) => (datum.day as Moment).date() === header.day && time === datum.begin);
   return (
     <td>
-      {filteredData.map((datum) => <div className={styles.item}>{datum.title}</div>)}
+      {filteredData.map((datum) => (
+        <div className={styles.item}>
+          <CustomLink target={`/conference/${datum.conferenceId}`} text={datum.title} />
+        </div>
+      ))}
     </td>
   );
 };

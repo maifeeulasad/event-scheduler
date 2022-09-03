@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface ICustomLinkProps {
   classes?: string
-  text: string
+  text: string | React.ReactNode
   target: string
 }
 

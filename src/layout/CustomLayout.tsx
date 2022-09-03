@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { CustomLink } from './CustomLink';
+import { CustomLink } from '../widget/link/CustomLink';
 
 import logo from './icon.svg';
 

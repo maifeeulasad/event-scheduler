@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 
 import imageLeft from './image-left.svg';
 import imageRight from './image-right.svg';
-import { CustomCalendar } from '../../widget/CustomCalendar';
+import { CustomCalendar } from '../../widget/calendar/CustomCalendar';
 
 const LandingStatic = () => (
   <div className="h-screen">
