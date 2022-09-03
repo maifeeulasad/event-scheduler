@@ -7,9 +7,11 @@ import { gql, useQuery } from '@apollo/client';
 import imageLeft from './image-left.svg';
 import imageRight from './image-right.svg';
 import { CustomCalendar } from '../../widget/calendar/CustomCalendar';
+import { NavBar } from '../nav/NavBar';
 
 const LandingStatic = () => (
   <div className="h-screen">
+    <NavBar />
     <div className="container">
       <div className="text-right">
         <h1>React</h1>
@@ -18,13 +20,23 @@ const LandingStatic = () => (
       <div className="flex">
         <img src={imageLeft} className="h-14" alt="icon" />
         <div className="w-1/3">
-          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-          <Button type="primary" shape="round" icon={<ArrowRightOutlined />} className="yellow-500">Buy Ticket</Button>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </div>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<ArrowRightOutlined />}
+            className="yellow-500"
+          >
+            Buy Ticket
+          </Button>
         </div>
         <img src={imageRight} className="h-20" alt="icon" />
       </div>
     </div>
-
   </div>
 );
 
@@ -43,7 +55,7 @@ const GetConferences = gql`
         title
       }
     }
-  }  
+  }
 `;
 
 const LandingCalendar = () => {
@@ -51,9 +63,20 @@ const LandingCalendar = () => {
   //   variables: { yearInput: '2022' },
   // });
   const { loading, data } = useQuery(GetConferences);
-  return loading ? <div>loading</div> : <CustomCalendar calendarData={data} />;
+  return loading ? (
+    <div>loading</div>
+  ) : (
+    <div className="h-screen">
+      <CustomCalendar calendarData={data} />
+    </div>
+  );
 };
 
-const Landing = () => <><LandingStatic /><LandingCalendar /></>;
+const Landing = () => (
+  <>
+    <LandingStatic />
+    <LandingCalendar />
+  </>
+);
 
 export { Landing };

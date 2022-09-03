@@ -4,11 +4,11 @@ import styles from './ContactCard.module.scss';
 import defaultImage from './404.png';
 
 interface IContactCard {
-  name: string
-  aboutShort: string
+  name: string;
+  aboutShort: string;
   image: {
-    url: string
-  }
+    url: string;
+  };
 }
 
 const ContactCard = ({ name, aboutShort, image }: IContactCard) => (

@@ -4,14 +4,14 @@ import styles from './ContactCard.module.scss';
 import defaultImage from './404.png';
 
 interface ILocationCard {
-  address: string
-  city: string
+  address: string;
+  city: string;
   image: {
-    url: string
-  }
-  country:{
-    name: string
-  }
+    url: string;
+  };
+  country: {
+    name: string;
+  };
 }
 
 const LocationCard = ({ address, city, image, country }: ILocationCard) => (
