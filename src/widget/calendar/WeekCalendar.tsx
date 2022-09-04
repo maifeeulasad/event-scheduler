@@ -16,10 +16,9 @@ interface ICellEntry {
 }
 
 const CellEntry = ({ time, data, header }: ICellEntry) => {
-  // eslint-disable-next-line max-len
   const filteredData = data.filter(
     (datum) =>
-      (datum.day as Moment).date() === header.day && time === datum.begin,
+      (datum.day as Moment).date() === header.day && datum.begin === time,
   );
   return (
     <td>
@@ -67,9 +66,6 @@ interface IWeekCalendar {
 }
 
 const WeekCalendar = ({ data }: IWeekCalendar) => {
-  // eslint-disable-next-line max-len
-  // const hours = [...Array.from({ length: 12 }, (_, i) => (`${i + 1}:00 AM`)), ...Array.from({ length: 12 }, (_, i) => (`${i + 1}:00 PM`))];
-  // const hours = [...Array.from({ length: 24 }, (_, i) => (`${i + 1}:00`))];
   const hours = useMemo(
     () => [...new Set(data.map((datum) => datum.begin))],
     [data],
@@ -84,11 +80,12 @@ const WeekCalendar = ({ data }: IWeekCalendar) => {
   );
 
   const headers: IHeaderData[] = useMemo(() => {
-    const smallestDay = sortedData[0].day.date();
+    const smallestDay = sortedData[0].day.clone();
+    const smallestDate = smallestDay.date();
     return [
       ...Array.from({ length: 7 }, (_, i) => ({
-        day: i + smallestDay,
-        weekday: sortedData[0].day.add(1, 'days').format('dddd'),
+        day: i + smallestDate,
+        weekday: smallestDay.add(1, 'days').format('dddd'),
       })),
     ];
   }, [sortedData]);
